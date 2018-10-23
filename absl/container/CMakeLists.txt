@@ -47,10 +47,21 @@ list(APPEND CONTAINER_INTERNAL_HEADERS
   "internal/unordered_set_modifiers_test.h"
 )
 
+list(APPEND CONTAINER_SRC
+  "internal/raw_hash_set.cc"
+  ${CONTAINER_PUBLIC_HEADERS}
+  ${CONTAINER_INTERNAL_HEADERS}
+)
 
-absl_header_library(
+set(CONTAINER_PUBLIC_LIBRARIES absl::hash)
+
+absl_library(
   TARGET
     absl_container
+  SOURCES
+    ${CONTAINER_SRC}
+  PUBLIC_LIBRARIES
+    ${CONTAINER_PUBLIC_LIBRARIES}
   EXPORT_NAME
     container
 )
